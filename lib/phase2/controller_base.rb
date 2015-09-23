@@ -10,7 +10,7 @@ module Phase2
 
     # Helper method to alias @already_built_response
     def already_built_response?
-      @already_built_response
+      @already_built_response ||= false
     end
 
     # Set the response status code and header
@@ -18,7 +18,7 @@ module Phase2
       raise "Render has already been built" if already_built_response?
       @res.status = 302
       @res['location'] = url
-      
+
       @already_built_response = true
     end
 
