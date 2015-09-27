@@ -1,5 +1,5 @@
 require 'webrick'
-require_relative '../lib/phase9-bonus/controller_base'
+require_relative './controller_base'
 require 'active_support'
 require 'active_support/core_ext'
 
@@ -32,11 +32,10 @@ class Cat
   end
 end
 
-class CatsController < Phase9::ControllerBase
+class CatsController < ControllerBase
   def create
     @cat = Cat.new(params["cat"])
     if @cat.save
-      flash.now["messages"] = "Success"
       redirect_to("/cats")
     else
       render :new
@@ -45,8 +44,6 @@ class CatsController < Phase9::ControllerBase
 
   def index
     @cats = Cat.all
-    p self.res.cookies
-
     render :index
   end
 
